@@ -67,11 +67,19 @@ class ViewController: UIViewController, WKScriptMessageHandler, UIImagePickerCon
 //                    }
 //                }
         
-        db.child("msg").observe(.value, with: {snapshot in
+        // .value : 데이터가 있으면 출력
+        // .childAdded : 데이터가 추가 되었다면
+        // .childChanged: 데이터가 변경되었다면.
+        db.child("msg").observe(.childAdded, with: {snapshot in
             print(snapshot.value)
             let value = snapshot.value as? String ?? ""
             self.wkWebView?.evaluateJavaScript("receiveNotification('"+value+"');", completionHandler: nil)
         })
+//        db.child("msg").observe(.childChanged, with: {snapshot in
+//            print(snapshot.value)
+//            let value = snapshot.value as? String ?? ""
+//            self.wkWebView?.evaluateJavaScript("receiveNotification('"+value+"');", completionHandler: nil)
+//        })
         
     }
     
