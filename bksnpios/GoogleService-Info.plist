@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>216634695194-8eape5s6e1321bh138k5p7gon6aursu8.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.216634695194-8eape5s6e1321bh138k5p7gon6aursu8</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAx2aPZe7NUQo_74y6jUag5Ol9njPz8XLk</string>
+	<key>GCM_SENDER_ID</key>
+	<string>216634695194</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>bksnp.bksnpios</string>
+	<key>PROJECT_ID</key>
+	<string>bksnp-ec823</string>
+	<key>STORAGE_BUCKET</key>
+	<string>bksnp-ec823.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:216634695194:ios:002ca3a2fab5642c567ba3</string>
+	<key>DATABASE_URL</key>
+	<string>https://bksnp-ec823-default-rtdb.asia-southeast1.firebasedatabase.app</string>
+</dict>
+</plist>

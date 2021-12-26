@@ -56,6 +56,12 @@
             shareDialog.classList.add('is-open');
         }
     }
+    
+    // Notification recieved data
+    function receiveNotification(msg) {
+        alert(msg);
+        console.log(msg);
+    }
 
 
 </script>
@@ -72,6 +78,7 @@
 6. Paste Test :
 <input type=text id="test" size=60 style="height:25pt;"><br>
 7. Web Share API [<a href="javascript:Share();">Click</a>] <br>
+8. recevieNotification(msg) : Firebase realtime database notification <br>
 </h1>
 </body>
 </html>

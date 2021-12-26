@@ -7,11 +7,13 @@
 
 import UIKit
 import WebKit
+import Firebase
 
 class ViewController: UIViewController, WKScriptMessageHandler, UIImagePickerControllerDelegate  {
     private var wkWebView: WKWebView? = nil
     private var config: WKWebViewConfiguration? = nil
     let imagePicker = UIImagePickerController()
+    let db = Database.database().reference()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,7 +57,21 @@ class ViewController: UIViewController, WKScriptMessageHandler, UIImagePickerCon
         
         // * WKWebView 화면에 표시
         self.view?.addSubview(self.wkWebView!)
-
+        
+//        db.child("msg").observeSingleEvent(of: .value) {snapshot in
+//                    print("---> \(snapshot)")
+//                    let value = snapshot.value as? String ?? "" //2번째 줄
+//                    DispatchQueue.main.async {
+//                        print(value)
+//                    }
+//                }
+        
+        db.child("msg").observe(.value, with: {snapshot in
+            print(snapshot.value)
+            let value = snapshot.value as? String ?? ""
+            self.wkWebView?.evaluateJavaScript("receiveNotification('"+value+"');", completionHandler: nil)
+        })
+        
     }
     
     // WKScriptMessageHandler : 등록한 헨들러가 호출될 경우 이벤트를 수신하는 함수
