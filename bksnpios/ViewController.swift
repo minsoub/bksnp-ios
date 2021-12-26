@@ -26,7 +26,8 @@ class ViewController: UIViewController, WKScriptMessageHandler, UIImagePickerCon
         self.config?.userContentController.add(self, name: "album")
         self.config?.userContentController.add(self, name: "storage")
         self.config?.userContentController.add(self, name: "device")
-        
+        self.config?.userContentController.add(self, name: "cache")
+        self.config?.userContentController.add(self, name: "base64")
         
         // * WKWebView 구성
         //    - 여기서는 self.view 화면 전체를 WKWebView로 구성하였습니다.
@@ -114,7 +115,94 @@ class ViewController: UIViewController, WKScriptMessageHandler, UIImagePickerCon
         }else if(message.name == "device") {
             let deviceid = UIDevice.current.identifierForVendor?.uuidString
             self.wkWebView?.evaluateJavaScript("setDeviceKey('"+deviceid!+"');", completionHandler: nil)
+        }else if(message.name == "cache") {
+            print("cache called......")
+            print(message.body)
+            if let getdata: [String: String] = message.body as? Dictionary {
+                print("callCacheFileWrite called..")
+                print("fileKey : " + getdata["fileKey"]!)
+                print("data : " + getdata["data"]!)
+                
+                let fileManager = FileManager.default
+                let urls = fileManager.urls(for: .cachesDirectory, in: .userDomainMask)
+                let cachesDirectoryUrl = urls[0]
+                let fileUrl = cachesDirectoryUrl.appendingPathComponent(getdata["fileKey"]!)
+                let filePath = fileUrl.path
+                if !fileManager.fileExists(atPath: filePath) {  // 파일이 존재하지 않으면..
+                    //let contents = getdata["data"]
+                    let contents: Data? = getdata["data"]?.data(using: .utf8)
+                    
+                    fileManager.createFile(atPath: filePath, contents: contents)
+                }else {
+                    let contents: Data? = getdata["data"]?.data(using: .utf8)
+                    
+                    fileManager.createFile(atPath: filePath, contents: contents)
+                }
+                //let defaults = UserDefaults.standard
+                //defaults.set(getdata["data"], forKey: getdata["fileKey"]!)
+                
+            }else {
+                print("callCacheFileRead called..")
+                print("fileKey : \(message.body)")
+                
+                let fileManager = FileManager.default
+                let urls = fileManager.urls(for: .cachesDirectory, in: .userDomainMask)
+                let cachesDirectoryUrl = urls[0]
+                let fileUrl = cachesDirectoryUrl.appendingPathComponent(message.body as! String)
+                do {
+                    let text = try String(contentsOf: fileUrl, encoding: .utf8)
+                    print(text)
+                    self.wkWebView?.evaluateJavaScript("setReadCache('"+text+"');", completionHandler: nil)
+                }catch let e {
+                    print(e.localizedDescription)
+                    self.wkWebView?.evaluateJavaScript("setReadCache('Not found data');", completionHandler: nil)
+                }
+            }
+        }else if(message.name == "base64") {
+            print("base64 called......")
+            print(message.body)
+            if let getdata: [String: String] = message.body as? Dictionary {
+                print("callBase64Save called..")
+                print("fileKey : " + getdata["fileKey"]!)
+                print("data : " + getdata["data"]!)
+                
+                let fileManager = FileManager.default
+                let urls = fileManager.urls(for: .cachesDirectory, in: .userDomainMask)
+                let cachesDirectoryUrl = urls[0]
+                let fileUrl = cachesDirectoryUrl.appendingPathComponent(getdata["fileKey"]!)
+                let filePath = fileUrl.path
+                if !fileManager.fileExists(atPath: filePath) {  // 파일이 존재하지 않으면..
+                    //let contents = getdata["data"]
+                    let contents: Data? = getdata["data"]?.data(using: .utf8)
+                    
+                    fileManager.createFile(atPath: filePath, contents: contents)
+                }else {
+                    let contents: Data? = getdata["data"]?.data(using: .utf8)
+                    
+                    fileManager.createFile(atPath: filePath, contents: contents)
+                }
+                //let defaults = UserDefaults.standard
+                //defaults.set(getdata["data"], forKey: getdata["fileKey"]!)
+                
+            }else {
+                print("callBase64Read called..")
+                print("fileKey : \(message.body)")
+                
+                let fileManager = FileManager.default
+                let urls = fileManager.urls(for: .cachesDirectory, in: .userDomainMask)
+                let cachesDirectoryUrl = urls[0]
+                let fileUrl = cachesDirectoryUrl.appendingPathComponent(message.body as! String)
+                do {
+                    let text = try String(contentsOf: fileUrl, encoding: .utf8)
+                    print(text)
+                    self.wkWebView?.evaluateJavaScript("setReadBase64('"+text+"');", completionHandler: nil)
+                }catch let e {
+                    print(e.localizedDescription)
+                    self.wkWebView?.evaluateJavaScript("setReadBase64('Not found data');", completionHandler: nil)
+                }
+            }
         }
+        
     }
 }
 
