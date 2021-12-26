@@ -16,6 +16,7 @@
 		C7491A9B27776FDD00145AE9 /* bksnpiosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7491A9A27776FDD00145AE9 /* bksnpiosTests.swift */; };
 		C7491AA527776FDD00145AE9 /* bksnpiosUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7491AA427776FDD00145AE9 /* bksnpiosUITests.swift */; };
 		C7491AA727776FDD00145AE9 /* bksnpiosUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7491AA627776FDD00145AE9 /* bksnpiosUITestsLaunchTests.swift */; };
+		C7491AB427782C4700145AE9 /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = C7491AB327782C4700145AE9 /* index.html */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		C7491AA027776FDD00145AE9 /* bksnpiosUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = bksnpiosUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7491AA427776FDD00145AE9 /* bksnpiosUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bksnpiosUITests.swift; sourceTree = "<group>"; };
 		C7491AA627776FDD00145AE9 /* bksnpiosUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bksnpiosUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		C7491AB327782C4700145AE9 /* index.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = index.html; path = bksnpios/Assets.xcassets/index.html; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +81,7 @@
 		C7491A7727776FDB00145AE9 = {
 			isa = PBXGroup;
 			children = (
+				C7491AB327782C4700145AE9 /* index.html */,
 				C7491A8227776FDB00145AE9 /* bksnpios */,
 				C7491A9927776FDD00145AE9 /* bksnpiosTests */,
 				C7491AA327776FDD00145AE9 /* bksnpiosUITests */,
@@ -231,6 +234,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C7491AB427782C4700145AE9 /* index.html in Resources */,
 				C7491A9027776FDD00145AE9 /* LaunchScreen.storyboard in Resources */,
 				C7491A8D27776FDD00145AE9 /* Assets.xcassets in Resources */,
 				C7491A8B27776FDB00145AE9 /* Main.storyboard in Resources */,
@@ -439,6 +443,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 43HT3RNKF8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = bksnpios/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -466,6 +471,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 43HT3RNKF8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = bksnpios/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

@@ -1,0 +1,77 @@
+<html>
+<head>Text</head>
+<script language="javascript">
+    function CallCamera() {
+        //window.bksnp.callCamera();
+        window.webkit.messageHandlers.camera.postMessage('test1');
+    }
+    function CallAlbum() {
+        //window.bksnp.callAlbum();
+        window.webkit.messageHandlers.album.postMessage('test2');
+    }
+
+    // 안드로이드 storage 파일의 read가 완료되었을 때 호출되는 메소드
+    function setReadStorage(data) {
+        console.log(data);
+        alert(data);
+    }
+    function callWriteStorage(fileKey, data) {
+        var Data = {
+            'fileKey': fileKey,
+            'data': data
+        };
+        //alert(Data);
+        //window.bksnp.callWriteStorage(fileKey, data);
+        window.webkit.messageHandlers.storage.postMessage(Data);
+    }
+    function callReadStorage(fileKey) {
+        window.webkit.messageHandlers.storage.postMessage(fileKey);
+    }
+    // Device Key read
+    function callDeviceKey() {
+        window.webkit.messageHandlers.device.postMessage('');
+        //window.bksnp.callDeviceKey();
+    }
+    function setDeviceKey(deviceId) {
+        alert(deviceId);
+        console.log(deviceId);
+    }
+
+    // 뒤로가기 버튼시 호출되는 메소드
+    function setBackButton() {
+        alert("뒤로가기 버튼 눌러짐");
+    }
+    
+    // Web Share API
+    function Share() {
+        if (navigator.share) {
+            navigator.share({
+              title: 'WebShare API Demo',
+              url: 'https://codepen.io/ayoisaiah/pen/YbNazJ'
+            }).then(() => {
+              console.log('Thanks for sharing!');
+            })
+            .catch(console.error);
+        } else {
+            shareDialog.classList.add('is-open');
+        }
+    }
+
+
+</script>
+<body>
+<h1>API Help</h1><br>
+
+<h1>
+1. Test camera call <a href="javascript:CallCamera();">Camera</a><br>
+2. Test Album call <a href="javascript:CallAlbum();">Album</a><br>
+3. Test storage save <a href="javascript:callWriteStorage('test.txt', 'Storage save data....');">Storage Save</a><br>
+4. Test storage read <a href="javascript:callReadStorage('test.txt');">Storead Read</a><br>
+5. Test Device Key read <a href="javascript:callDeviceKey();">Device Key Read</a><br>
+5. setBackButton : 안드로이드에서 뒤로가기 버튼 클릭시 호출됨<br>
+6. Paste Test :
+<input type=text id="test" size=60 style="height:25pt;"><br>
+7. Web Share API [<a href="javascript:Share();">Click</a>] <br>
+</h1>
+</body>
+</html>
