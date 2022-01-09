@@ -96,7 +96,15 @@
         console.log(data);
         //alert(data);
     }
-
+    
+    // token data call
+    function TokenData() {
+        window.webkit.messageHandlers.token.postMessage('');
+    }
+    function setTokenData(data) {
+        console.log(data);
+        alert(data);
+    }
 
 </script>
 <body>
@@ -117,6 +125,7 @@
 <input type=text id="test" size=60 style="height:25pt;"><br>
 12. Web Share API [<a href="javascript:Share();">Click</a>] <br>
 13. recevieNotification(msg) : Firebase realtime database notification <br>
+14. Token data : [<a href="javascript:TokenData();">Click</a>]<br>
 </h1>
 </body>
 </html>

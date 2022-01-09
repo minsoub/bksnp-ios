@@ -8,15 +8,31 @@
 import UIKit
 import WebKit
 import Firebase
+import FirebaseMessaging
+
 
 class ViewController: UIViewController, WKScriptMessageHandler, UIImagePickerControllerDelegate  {
     private var wkWebView: WKWebView? = nil
     private var config: WKWebViewConfiguration? = nil
     let imagePicker = UIImagePickerController()
-    let db = Database.database().reference()
+    //let db = Database.database().reference()
+    private var mToken: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //Messaging.messaging().delegate = self
+        Messaging.messaging().token { token, error in
+          if let error = error {
+            print("Error fetching FCM registration token: \(error)")
+          } else if let token = token {
+            print("FCM registration token: \(token)")
+            //self.fcmRegTokenMessage.text  = "Remote FCM registration token: \(token)"
+              self.mToken = token
+          }
+        }
+        
+        
         // Do any additional setup after loading the view.
         self.config = WKWebViewConfiguration.init()
         self.config?.userContentController = WKUserContentController.init()
@@ -28,6 +44,7 @@ class ViewController: UIViewController, WKScriptMessageHandler, UIImagePickerCon
         self.config?.userContentController.add(self, name: "device")
         self.config?.userContentController.add(self, name: "cache")
         self.config?.userContentController.add(self, name: "base64")
+        self.config?.userContentController.add(self, name: "token")
         
         // * WKWebView 구성
         //    - 여기서는 self.view 화면 전체를 WKWebView로 구성하였습니다.
@@ -70,19 +87,27 @@ class ViewController: UIViewController, WKScriptMessageHandler, UIImagePickerCon
         // .value : 데이터가 있으면 출력
         // .childAdded : 데이터가 추가 되었다면
         // .childChanged: 데이터가 변경되었다면.
-        db.child("msg").observe(.childAdded, with: {snapshot in
-            print(snapshot.value)
-            let value = snapshot.value as? String ?? ""
-            self.wkWebView?.evaluateJavaScript("receiveNotification('"+value+"');", completionHandler: nil)
-        })
+//        db.child("msg").observe(.childAdded, with: {snapshot in
+//            print(snapshot.value)
+//            let value = snapshot.value as? String ?? ""
+//            self.wkWebView?.evaluateJavaScript("receiveNotification('"+value+"');", completionHandler: nil)
+//        })
 //        db.child("msg").observe(.childChanged, with: {snapshot in
 //            print(snapshot.value)
 //            let value = snapshot.value as? String ?? ""
 //            self.wkWebView?.evaluateJavaScript("receiveNotification('"+value+"');", completionHandler: nil)
 //        })
         
+        NotificationCenter.default.addObserver(self, selector: #selector(userNotifyMessage(_:)), name: NSNotification.Name("MyMessage"), object: nil)
+        
     }
     
+    @objc func userNotifyMessage(_ notification: Notification) {
+        print("userNotifyMessage called..")
+        let getValue = notification.object as! String
+        print(getValue)
+        self.wkWebView?.evaluateJavaScript("receiveNotification('"+getValue+"');", completionHandler: nil)
+    }
     // WKScriptMessageHandler : 등록한 헨들러가 호출될 경우 이벤트를 수신하는 함수
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
 
@@ -209,15 +234,16 @@ class ViewController: UIViewController, WKScriptMessageHandler, UIImagePickerCon
                     self.wkWebView?.evaluateJavaScript("setReadBase64('Not found data');", completionHandler: nil)
                 }
             }
+        }else if(message.name == "token") {
+            self.wkWebView?.evaluateJavaScript("setTokenData('"+mToken!+"');", completionHandler: nil)
         }
-        
     }
 }
 
 extension ViewController: WKUIDelegate {
     
     func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping () -> Void) {
-        let alertController = UIAlertController(title: "test", message: message, preferredStyle: .alert)
+        let alertController = UIAlertController(title: "Ohnion", message: message, preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "확인", style: .cancel) { _ in
             completionHandler()
         }
@@ -228,7 +254,7 @@ extension ViewController: WKUIDelegate {
     }
     
     func webView(_ webView: WKWebView, runJavaScriptConfirmPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping (Bool) -> Void) {
-        let alertController = UIAlertController(title: "test", message: message, preferredStyle: .alert)
+        let alertController = UIAlertController(title: "Ohnion", message: message, preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "취소", style: .cancel) { _ in
             completionHandler(false)
         }
