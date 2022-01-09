@@ -24,6 +24,9 @@
 		C7491ABF27784DB000145AE9 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = C7491ABE27784DB000145AE9 /* FirebaseFirestore */; };
 		C7491AC127785C2F00145AE9 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = C7491AC027785C2F00145AE9 /* README.md */; };
 		C7491AC4278050DF00145AE9 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = C7491AC3278050DF00145AE9 /* FirebaseMessaging */; };
+		C7491AC7278A903700145AE9 /* FirebaseDynamicLinks in Frameworks */ = {isa = PBXBuildFile; productRef = C7491AC6278A903700145AE9 /* FirebaseDynamicLinks */; };
+		C7491AC9278AB6C500145AE9 /* User.plist in Resources */ = {isa = PBXBuildFile; fileRef = C7491AC8278AB6C500145AE9 /* User.plist */; };
+		C7491ACB278ABA9500145AE9 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7491ACA278ABA9500145AE9 /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +64,8 @@
 		C7491AB527784B5A00145AE9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C7491AC027785C2F00145AE9 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		C7491AC52780613E00145AE9 /* bksnpios.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = bksnpios.entitlements; sourceTree = "<group>"; };
+		C7491AC8278AB6C500145AE9 /* User.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = User.plist; sourceTree = "<group>"; };
+		C7491ACA278ABA9500145AE9 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +78,7 @@
 				C7491AC4278050DF00145AE9 /* FirebaseMessaging in Frameworks */,
 				C7491AB927784DB000145AE9 /* FirebaseAnalytics in Frameworks */,
 				C7491ABB27784DB000145AE9 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
+				C7491AC7278A903700145AE9 /* FirebaseDynamicLinks in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -96,6 +102,7 @@
 		C7491A7727776FDB00145AE9 = {
 			isa = PBXGroup;
 			children = (
+				C7491AC8278AB6C500145AE9 /* User.plist */,
 				C7491AC027785C2F00145AE9 /* README.md */,
 				C7491AB327782C4700145AE9 /* index.html */,
 				C7491A8227776FDB00145AE9 /* bksnpios */,
@@ -119,6 +126,7 @@
 		C7491A8227776FDB00145AE9 /* bksnpios */ = {
 			isa = PBXGroup;
 			children = (
+				C7491ACA278ABA9500145AE9 /* Constants.swift */,
 				C7491AC52780613E00145AE9 /* bksnpios.entitlements */,
 				C7491AB527784B5A00145AE9 /* GoogleService-Info.plist */,
 				C7491A8327776FDB00145AE9 /* AppDelegate.swift */,
@@ -178,6 +186,7 @@
 				C7491ABC27784DB000145AE9 /* FirebaseDatabase */,
 				C7491ABE27784DB000145AE9 /* FirebaseFirestore */,
 				C7491AC3278050DF00145AE9 /* FirebaseMessaging */,
+				C7491AC6278A903700145AE9 /* FirebaseDynamicLinks */,
 			);
 			productName = bksnpios;
 			productReference = C7491A8027776FDB00145AE9 /* bksnpios.app */;
@@ -276,6 +285,7 @@
 				C7491AB627784B5A00145AE9 /* GoogleService-Info.plist in Resources */,
 				C7491A8D27776FDD00145AE9 /* Assets.xcassets in Resources */,
 				C7491A8B27776FDB00145AE9 /* Main.storyboard in Resources */,
+				C7491AC9278AB6C500145AE9 /* User.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -303,6 +313,7 @@
 				C7491A8827776FDB00145AE9 /* ViewController.swift in Sources */,
 				C7491A8427776FDB00145AE9 /* AppDelegate.swift in Sources */,
 				C7491A8627776FDB00145AE9 /* SceneDelegate.swift in Sources */,
+				C7491ACB278ABA9500145AE9 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -706,6 +717,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = C7491AB727784DB000145AE9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseMessaging;
+		};
+		C7491AC6278A903700145AE9 /* FirebaseDynamicLinks */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C7491AB727784DB000145AE9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDynamicLinks;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

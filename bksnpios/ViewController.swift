@@ -9,6 +9,7 @@ import UIKit
 import WebKit
 import Firebase
 import FirebaseMessaging
+import FirebaseDynamicLinks
 
 
 class ViewController: UIViewController, WKScriptMessageHandler, UIImagePickerControllerDelegate  {
@@ -45,6 +46,7 @@ class ViewController: UIViewController, WKScriptMessageHandler, UIImagePickerCon
         self.config?.userContentController.add(self, name: "cache")
         self.config?.userContentController.add(self, name: "base64")
         self.config?.userContentController.add(self, name: "token")
+        self.config?.userContentController.add(self, name: "share")
         
         // * WKWebView 구성
         //    - 여기서는 self.view 화면 전체를 WKWebView로 구성하였습니다.
@@ -58,14 +60,14 @@ class ViewController: UIViewController, WKScriptMessageHandler, UIImagePickerCon
         self.wkWebView?.backgroundColor = UIColor.clear
         self.wkWebView?.isOpaque = false
         self.wkWebView?.loadHTMLString("<body style=\"background-color: transparent\">", baseURL: nil)
-           
+        self.wkWebView?.uiDelegate = self
+        
         // * WKWebView에 로딩할 URL 전달
         //    - 캐시 기본 정책 사용, 타임아웃은 10초로 지정하였습니다.
 //        let request: URLRequest = URLRequest.init(url: NSURL.init(string: "https://sosoingkr.tistory.com/19")! as URL, cachePolicy: URLRequest.CachePolicy.useProtocolCachePolicy, timeoutInterval: 10)
 //
 //        self.wkWebView?.load(request)
         
-        self.wkWebView?.uiDelegate = self
         
         let data = Bundle.main.url(forResource: "index", withExtension: "html")!
         self.wkWebView?.loadFileURL(data, allowingReadAccessTo: data)
@@ -75,32 +77,44 @@ class ViewController: UIViewController, WKScriptMessageHandler, UIImagePickerCon
         
         // * WKWebView 화면에 표시
         self.view?.addSubview(self.wkWebView!)
+
         
-//        db.child("msg").observeSingleEvent(of: .value) {snapshot in
-//                    print("---> \(snapshot)")
-//                    let value = snapshot.value as? String ?? "" //2번째 줄
-//                    DispatchQueue.main.async {
-//                        print(value)
-//                    }
-//                }
+        NotificationCenter.default.addObserver(self, selector: #selector(userNotifyMessage(_:)), name: NSNotification.Name(Constants.firebaseNotificationNameKey), object: nil)
         
-        // .value : 데이터가 있으면 출력
-        // .childAdded : 데이터가 추가 되었다면
-        // .childChanged: 데이터가 변경되었다면.
-//        db.child("msg").observe(.childAdded, with: {snapshot in
-//            print(snapshot.value)
-//            let value = snapshot.value as? String ?? ""
-//            self.wkWebView?.evaluateJavaScript("receiveNotification('"+value+"');", completionHandler: nil)
-//        })
-//        db.child("msg").observe(.childChanged, with: {snapshot in
-//            print(snapshot.value)
-//            let value = snapshot.value as? String ?? ""
-//            self.wkWebView?.evaluateJavaScript("receiveNotification('"+value+"');", completionHandler: nil)
-//        })
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(userNotifyMessage(_:)), name: NSNotification.Name("MyMessage"), object: nil)
+        handleFirebaseDynamicLink()
+        addNotificationObserver()
+    }
+    
+    deinit {
+        removeNotificationObserver()
+    }
+    
+    private func handleFirebaseDynamicLink() {
+        if let urlString = Constants.firebaseDynamicLink {
+            
+            self.wkWebView?.load(URLRequest(url: URL(string: urlString)!))
+            Constants.firebaseDynamicLink = nil
+        }
+    }
+    
+    private func addNotificationObserver() {
+        NotificationCenter.default.addObserver(self, selector: #selector(onNotificationReceived(notification:)), name: Notification.Name(rawValue: "clickFirebaseDynamicLink"), object: nil)
         
     }
+    
+    private func removeNotificationObserver() {
+        NotificationCenter.default.removeObserver(self, name: Notification.Name(rawValue: "clickFirebaseDynamicLink"), object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: Constants.firebaseNotificationNameKey), object: nil)
+    }
+    
+    @objc func onNotificationReceived(notification: Notification) {
+        if let urlString = notification.object as? String {
+            
+            self.wkWebView?.load(URLRequest(url: URL(string: urlString)!))
+           
+        }
+    }
+    
     
     @objc func userNotifyMessage(_ notification: Notification) {
         print("userNotifyMessage called..")
@@ -236,6 +250,50 @@ class ViewController: UIViewController, WKScriptMessageHandler, UIImagePickerCon
             }
         }else if(message.name == "token") {
             self.wkWebView?.evaluateJavaScript("setTokenData('"+mToken!+"');", completionHandler: nil)
+        }else if(message.name == "share") {
+            if let getdata: [String: String] = message.body as? Dictionary {
+                print("share called..")
+                print("subject : " + getdata["subject"]!)
+                print("link : " + getdata["link"]!)
+                print("image_link : " + getdata["image_link"]!)
+                
+                // dynamiclink를 통한 공유하기
+                let link = URL(string: getdata["link"]!)
+                let referralLink = DynamicLinkComponents(link: link!, domainURIPrefix: Constants.dynamicLinkDomainUrl)  // "https://ohnion.page.link")
+                                
+                // iOS 설정
+                referralLink?.iOSParameters = DynamicLinkIOSParameters(bundleID: "bksnp.ohnion")
+                referralLink?.iOSParameters?.minimumAppVersion = "1.0.1"
+                referralLink?.iOSParameters?.appStoreID = Constants.appStoreID  // "1440705745" //나중에 수정하세요
+                                                           
+                // Android 설정
+                referralLink?.androidParameters = DynamicLinkAndroidParameters(packageName: "com.bksnp")
+                referralLink?.androidParameters?.minimumVersion = 811
+                
+                // Social
+                referralLink?.socialMetaTagParameters = DynamicLinkSocialMetaTagParameters()
+                referralLink?.socialMetaTagParameters?.title = getdata["subject"]!
+                referralLink?.socialMetaTagParameters?.imageURL = URL(string: getdata["image_link"]!)
+                
+                // 단축 URL 생성
+                referralLink?.shorten { (shortURL, warnings, error) in
+                   if let error = error {
+                       print(error.localizedDescription)
+                           return
+                    }
+                    print(shortURL)
+                                       
+                    var objectsToShare = [Any]()
+                    objectsToShare.append(shortURL)
+                    
+                    let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+                    activityVC.popoverPresentationController?.sourceView = self.view
+                    self.present(activityVC, animated: true, completion: nil)
+                 }
+                
+                ////////////////
+            }
+            
         }
     }
 }

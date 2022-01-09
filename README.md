@@ -21,5 +21,128 @@
 - 사용할 Firebase 라이브러리를 선택한다. 
 - FirebaseAnalytics를 추가해야 한다. IDEA 수집 기능이 없는 애널리틱스의 경우 대신 FirebaseAnalyticsWithoutAdId를 추가한다. 
 - Finish를 클릭하면 Xcode가 백그라운드에서 자동으로 종속 항목을 확인하고 다운로드하기 시작.
-##### 초기화 코드 추가 
+#### 기능 리스트
+- 아래 함수는 사용하지 않음.
+```shell
+    function CallCamera() {
+        //window.bksnp.callCamera();
+        window.webkit.messageHandlers.camera.postMessage('test1');
+    }
+    function CallAlbum() {
+        //window.bksnp.callAlbum();
+        window.webkit.messageHandlers.album.postMessage('test2');
+    }
+```
+
+- 스토리지 저장하기
+```shell
+    function callWriteStorage(fileKey, data) {
+        var Data = {
+            'fileKey': fileKey,
+            'data': data
+        };
+        window.webkit.messageHandlers.storage.postMessage(Data);
+    }
+```
+- 스토리지 읽기
+```shell
+    function callReadStorage(fileKey) {
+        window.webkit.messageHandlers.storage.postMessage(fileKey);
+    }
+    // 안드로이드 storage 파일의 read가 완료되었을 때 호출되는 메소드
+    function setReadStorage(data) {
+        console.log(data);
+        alert(data);
+    }    
+```
+- Device Key read
+```shell
+    // Device Key read
+    function callDeviceKey() {
+        window.webkit.messageHandlers.device.postMessage('');
+        //window.bksnp.callDeviceKey();
+    }
+    function setDeviceKey(deviceId) {
+        alert(deviceId);
+        console.log(deviceId);
+    }
+```
+
+- 아이폰에 Notification이 도착했을 때 호출
+```shell    
+    // Notification recieved data
+    function receiveNotification(msg) {
+        alert(msg);
+        console.log(msg);
+    }
+```
+- Cache write
+```shell    
+    // Cache write
+    function callCacheFileWrite(fileKey, data) {
+        var requestData = {
+            'fileKey': fileKey,
+            'data': data
+        };
+        window.webkit.messageHandlers.cache.postMessage(requestData);
+    }
+```
+- Cache read
+```shell
+    // Cache read
+    function callCacheFileRead(fileKey) {
+        window.webkit.messageHandlers.cache.postMessage(fileKey);
+    }
+    // iphone에서 cache를 읽었을 때 호출
+    function setReadCache(data) {
+        console.log(data);
+        alert(data);
+    }
+```
+- Base64 data save
+```shell
+    // Base64 encoding data save
+    function callBase64Save(fileKey, data) {
+        var requestData = {
+            'fileKey': fileKey,
+            'data': data
+        };
+        window.webkit.messageHandlers.base64.postMessage(requestData);
+    }
+```
+- Base64 data read
+```shell
+    // Base64 encoding data read
+    function callBase64Read(fileKey) {
+        window.webkit.messageHandlers.base64.postMessage(fileKey);
+    }
+    // iphone에서 cache를 읽었을 때 호출
+    function setReadBase64(data) {
+        console.log(data);
+        //alert(data);
+    }
+```
+- Firebase Token data get
+```shell    
+    // token data call
+    function TokenData() {
+        window.webkit.messageHandlers.token.postMessage('');
+    }
+    function setTokenData(data) {
+        console.log(data);
+        alert(data);
+    }
+```
+- SNS 공유 요청하기
+```shell
+    // share
+    function ShareLink() {
+        var requestData = {
+            'subject': '친구에게 공유하기',
+            'link': 'http://teengle.co.kr',
+            'image_link': 'https://backlog.com/git-tutorial/kr/img/post/stepup/capture_stepup2_3_2.png'
+        };
+        window.webkit.messageHandlers.share.postMessage(requestData);
+    }
+```
 

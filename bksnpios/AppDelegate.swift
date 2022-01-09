@@ -90,10 +90,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("recevied data (1)")
         print(userInfo)
         
-        let msgKey = "google.c.a.c_l"
-        if let msg = userInfo[msgKey] {
+        if let msg = userInfo[Constants.firebaseRecevieMsgKey] {
             print("data =>  \(msg)")
-            NotificationCenter.default.post(name: NSNotification.Name("MyMessage"), object: msg, userInfo: nil)
+            NotificationCenter.default.post(name: NSNotification.Name(Constants.firebaseNotificationNameKey), object: msg, userInfo: nil)
         }
 
         completionHandler(UIBackgroundFetchResult.newData)
@@ -157,10 +156,10 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
       print("Message ID(ios10>): \(messageID)")
     }
     // [END_EXCLUDE]
-    let msgKey = "google.c.a.c_l"
-    if let msg = userInfo[msgKey] {
+
+    if let msg = userInfo[Constants.firebaseRecevieMsgKey] {
         print("data =>  \(msg)")
-        NotificationCenter.default.post(name: NSNotification.Name("MyMessage"), object: msg, userInfo: nil)
+        NotificationCenter.default.post(name: NSNotification.Name(Constants.firebaseNotificationNameKey), object: msg, userInfo: nil)
     }
     // Print full message.
     print("ios10 received data: ")
@@ -187,10 +186,9 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     print("recevied msg (3) ")
     print(userInfo)
       
-    let msgKey = "google.c.a.c_l"
-    if let msg = userInfo[msgKey] {
+    if let msg = userInfo[Constants.firebaseRecevieMsgKey] {
         print("data =>  \(msg)")
-        NotificationCenter.default.post(name: NSNotification.Name("MyMessage"), object: msg, userInfo: nil)
+        NotificationCenter.default.post(name: NSNotification.Name(Constants.firebaseNotificationNameKey), object: msg, userInfo: nil)
     }
 
     completionHandler()
