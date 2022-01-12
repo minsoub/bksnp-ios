@@ -27,6 +27,8 @@
 		C7491AC7278A903700145AE9 /* FirebaseDynamicLinks in Frameworks */ = {isa = PBXBuildFile; productRef = C7491AC6278A903700145AE9 /* FirebaseDynamicLinks */; };
 		C7491AC9278AB6C500145AE9 /* User.plist in Resources */ = {isa = PBXBuildFile; fileRef = C7491AC8278AB6C500145AE9 /* User.plist */; };
 		C7491ACB278ABA9500145AE9 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7491ACA278ABA9500145AE9 /* Constants.swift */; };
+		C7491ACD278EE16600145AE9 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7491ACC278EE16600145AE9 /* ImagePicker.swift */; };
+		C7491ACF278EE89D00145AE9 /* ImagePickerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7491ACE278EE89D00145AE9 /* ImagePickerProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +68,8 @@
 		C7491AC52780613E00145AE9 /* bksnpios.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = bksnpios.entitlements; sourceTree = "<group>"; };
 		C7491AC8278AB6C500145AE9 /* User.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = User.plist; sourceTree = "<group>"; };
 		C7491ACA278ABA9500145AE9 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		C7491ACC278EE16600145AE9 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		C7491ACE278EE89D00145AE9 /* ImagePickerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +140,8 @@
 				C7491A8C27776FDD00145AE9 /* Assets.xcassets */,
 				C7491A8E27776FDD00145AE9 /* LaunchScreen.storyboard */,
 				C7491A9127776FDD00145AE9 /* Info.plist */,
+				C7491ACC278EE16600145AE9 /* ImagePicker.swift */,
+				C7491ACE278EE89D00145AE9 /* ImagePickerProtocol.swift */,
 			);
 			path = bksnpios;
 			sourceTree = "<group>";
@@ -311,7 +317,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				C7491A8827776FDB00145AE9 /* ViewController.swift in Sources */,
+				C7491ACF278EE89D00145AE9 /* ImagePickerProtocol.swift in Sources */,
 				C7491A8427776FDB00145AE9 /* AppDelegate.swift in Sources */,
+				C7491ACD278EE16600145AE9 /* ImagePicker.swift in Sources */,
 				C7491A8627776FDB00145AE9 /* SceneDelegate.swift in Sources */,
 				C7491ACB278ABA9500145AE9 /* Constants.swift in Sources */,
 			);

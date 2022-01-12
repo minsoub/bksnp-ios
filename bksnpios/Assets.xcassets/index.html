@@ -2,13 +2,32 @@
 <head>Text</head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <script language="javascript">
+    var cameraData = "";
+    var photoData = "";
     function CallCamera() {
         //window.bksnp.callCamera();
+        cameraData = "";
         window.webkit.messageHandlers.camera.postMessage('test1');
     }
+    function addCameraData(data) {
+        cameraData += data;
+    }
+    function setCameraData(data) {
+        alert(cameraData.length);
+        console.log(cameraData.length);
+    }
+    
     function CallAlbum() {
         //window.bksnp.callAlbum();
+        photoData = "";
         window.webkit.messageHandlers.album.postMessage('test2');
+    }
+    function addAlbumData(data) {
+        photoData += data;
+    }
+    function setAlbumData(data) {
+        lert(photoData.length);
+        console.log(photoData);
     }
 
     // 안드로이드 storage 파일의 read가 완료되었을 때 호출되는 메소드
@@ -121,10 +140,9 @@
 <h1>API Help</h1><br>
 
 <h1>
-<form method="post" enctype="multipart/form-data">
+<form method="post">
 1. Test camera call <a href="javascript:CallCamera();">Camera</a><br>
 2. Test Album call <a href="javascript:CallAlbum();">Album</a><br>
-<input type="file" id="testfile" accept="image/*" >
 3. Test storage save <a href="javascript:callWriteStorage('test.txt', 'Storage save data....');">Storage Save</a><br>
 4. Test storage read <a href="javascript:callReadStorage('test.txt');">Storead Read</a><br>
 5. Test Device Key read <a href="javascript:callDeviceKey();">Device Key Read</a><br>

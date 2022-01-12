@@ -13,9 +13,15 @@ import FirebaseDynamicLinks
 
 
 class ViewController: UIViewController, WKScriptMessageHandler, UIImagePickerControllerDelegate  {
+    
+    private lazy var imagePicker: ImagePickerProtocol = {
+            let imagePicker = ImagePicker(parentViewController: self)
+            return imagePicker
+        }()
+    
     private var wkWebView: WKWebView? = nil
     private var config: WKWebViewConfiguration? = nil
-    let imagePicker = UIImagePickerController()
+    //var imagePicker = ImagePicker!  // UIImagePickerController()
     //let db = Database.database().reference()
     private var mToken: String?
     
@@ -83,6 +89,8 @@ class ViewController: UIViewController, WKScriptMessageHandler, UIImagePickerCon
         
         handleFirebaseDynamicLink()
         addNotificationObserver()
+        
+        //self.imagePicker = ImagePicker(presentationController: self, delegate: self)
     }
     
     deinit {
@@ -129,15 +137,74 @@ class ViewController: UIViewController, WKScriptMessageHandler, UIImagePickerCon
         print("message body => \(message.body)")
         
         if (message.name == "camera") {
-            imagePicker.allowsEditing = true
-            imagePicker.sourceType = .camera
+            //self.imagePicker.present(from: nil)
+            //imagePicker.allowsEditing = true
+            //imagePicker.sourceType = .camera
             
-            present(imagePicker, animated: true, completion: nil)
+            //present(imagePicker, animated: true, completion: nil)
+            ///self.presentedViewController(imagePicker, animated: true, completion: nil)
+            imagePicker.startImagePicker(withSourceType: .camera) { [weak self] image in
+                        //self?.imageView.image = image
+                let imageData:NSData = image.jpegData(compressionQuality: 0.50)! as NSData  //mage.pngData()! as NSData
+                let strBase64:String = imageData.base64EncodedString(options:  .init(rawValue: 0))  // .lineLength64Characters)
+                
+                var index = 0
+                var readLength = 500000
+                var readData: String = ""
+                print(strBase64.count)  // 결과값이 3이 더 많다.. 고민해야됨
+                var cnt = 0
+                repeat {
+                    readData = strBase64.substring(from: index, to: readLength)
+                    //print(readData)
+                    // script call
+                    print(cnt)
+                    cnt += 1
+                    self?.wkWebView?.evaluateJavaScript("addCameraData('"+readData+"');", completionHandler: nil)
+                    index = readLength
+                    if (strBase64.count > (index + 499999)) {
+                        readLength += 500000
+                    }else {
+                        readData = strBase64.substring(from: index, to: strBase64.count-1)
+                        //print(readData)
+                        // script call
+                        self?.wkWebView?.evaluateJavaScript("addCameraData('"+readData+"');", completionHandler: nil)
+                        break
+                    }
+                } while (strBase64.count > index)
+                
+                self?.wkWebView?.evaluateJavaScript("setCameraData('');", completionHandler: nil)
+            }
         }else if(message.name == "album") {
-            imagePicker.allowsEditing = true
-            imagePicker.sourceType = .photoLibrary
+            //imagePicker.allowsEditing = true
+            //imagePicker.sourceType = .photoLibrary
             
-            present(imagePicker, animated: true, completion: nil)
+            //present(imagePicker, animated: true, completion: nil)
+            imagePicker.startImagePicker(withSourceType: .photoLibrary) { [weak self] image in
+                        //self?.imageView.image = image
+                let imageData:NSData = image.jpegData(compressionQuality: 0.50)! as NSData  //mage.pngData()! as NSData
+                let strBase64:String = imageData.base64EncodedString(options:  .init(rawValue: 0))  // .lineLength64Characters)
+                
+                var index = 0
+                var readLength = 500000
+                var readData: String = ""
+                print(strBase64.count)
+                repeat {
+                    readData = strBase64.substring(from: index, to: readLength)
+                    // script call
+                    self?.wkWebView?.evaluateJavaScript("addAlbumData('"+readData+"');", completionHandler: nil)
+                    index = readLength
+                    if (strBase64.count > (index + 499999)) {
+                        readLength += 500000
+                    }else {
+                        readData = strBase64.substring(from: index, to: strBase64.count)
+                        // script call
+                        self?.wkWebView?.evaluateJavaScript("addAlbumData('"+readData+"');", completionHandler: nil)
+                        break
+                    }
+                } while (strBase64.count > index)
+                
+                self?.wkWebView?.evaluateJavaScript("setAlbumData('');", completionHandler: nil)
+            }
         }else if(message.name == "storage") {
             if let getdata: [String: String] = message.body as? Dictionary {
                 print("callWriteStorage called..")
@@ -296,6 +363,7 @@ class ViewController: UIViewController, WKScriptMessageHandler, UIImagePickerCon
             
         }
     }
+    
 }
 
 extension ViewController: WKUIDelegate {
@@ -327,4 +395,17 @@ extension ViewController: WKUIDelegate {
     }
 }
 
-
+extension String {
+    func substring(from: Int, to: Int) -> String {
+      guard from < count, to >= 0, to - from >= 0 else {
+          return ""
+      }
+                        
+      // Index 값 획득
+      let startIndex = index(self.startIndex, offsetBy: from)
+      let endIndex = index(self.startIndex, offsetBy: to + 1) // '+1'이 있는 이유: endIndex는 문자열의 마지막 그 다음을 가리키기 때문
+                        
+      // 파싱
+      return String(self[startIndex ..< endIndex])
+    }
+}
