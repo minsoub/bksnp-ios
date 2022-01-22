@@ -12,7 +12,8 @@ import FirebaseMessaging
 import FirebaseDynamicLinks
 
 
-class ViewController: UIViewController, WKScriptMessageHandler, UIImagePickerControllerDelegate  {
+class ViewController: UIViewController, WKScriptMessageHandler, UIImagePickerControllerDelegate, WKNavigationDelegate
+{
     
     private lazy var imagePicker: ImagePickerProtocol = {
             let imagePicker = ImagePicker(parentViewController: self)
@@ -24,6 +25,7 @@ class ViewController: UIViewController, WKScriptMessageHandler, UIImagePickerCon
     //var imagePicker = ImagePicker!  // UIImagePickerController()
     //let db = Database.database().reference()
     private var mToken: String?
+    private var mPathName: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,6 +55,9 @@ class ViewController: UIViewController, WKScriptMessageHandler, UIImagePickerCon
         self.config?.userContentController.add(self, name: "base64")
         self.config?.userContentController.add(self, name: "token")
         self.config?.userContentController.add(self, name: "share")
+        self.config?.userContentController.add(self, name: "dir")
+        self.config?.userContentController.add(self, name: "appexit")
+        self.config?.userContentController.add(self, name: "teengle")
         
         // * WKWebView 구성
         //    - 여기서는 self.view 화면 전체를 WKWebView로 구성하였습니다.
@@ -67,18 +72,19 @@ class ViewController: UIViewController, WKScriptMessageHandler, UIImagePickerCon
         self.wkWebView?.isOpaque = false
         self.wkWebView?.loadHTMLString("<body style=\"background-color: transparent\">", baseURL: nil)
         self.wkWebView?.uiDelegate = self
+        self.wkWebView?.allowsBackForwardNavigationGestures = true
+        self.wkWebView?.navigationDelegate = self
         
         // * WKWebView에 로딩할 URL 전달
         //    - 캐시 기본 정책 사용, 타임아웃은 10초로 지정하였습니다.
-//        let request: URLRequest = URLRequest.init(url: NSURL.init(string: "https://sosoingkr.tistory.com/19")! as URL, cachePolicy: URLRequest.CachePolicy.useProtocolCachePolicy, timeoutInterval: 10)
-//
-//        self.wkWebView?.load(request)
-        
-        
-        let data = Bundle.main.url(forResource: "index", withExtension: "html")!
-        self.wkWebView?.loadFileURL(data, allowingReadAccessTo: data)
-        let request = URLRequest(url: data)
+        let request: URLRequest = URLRequest.init(url: NSURL.init(string: Constants.webURL)! as URL, cachePolicy: URLRequest.CachePolicy.useProtocolCachePolicy, timeoutInterval: 10)
         self.wkWebView?.load(request)
+        
+        
+//        let data = Bundle.main.url(forResource: "index", withExtension: "html")!
+//        self.wkWebView?.loadFileURL(data, allowingReadAccessTo: data)
+//        let request = URLRequest(url: data)
+//        self.wkWebView?.load(request)
         
         
         // * WKWebView 화면에 표시
@@ -88,13 +94,56 @@ class ViewController: UIViewController, WKScriptMessageHandler, UIImagePickerCon
         NotificationCenter.default.addObserver(self, selector: #selector(userNotifyMessage(_:)), name: NSNotification.Name(Constants.firebaseNotificationNameKey), object: nil)
         
         handleFirebaseDynamicLink()
-        addNotificationObserver()
+        addNotificationObserver()  // 여러가지 Notification의 observer를 등록한다.
         
         //self.imagePicker = ImagePicker(presentationController: self, delegate: self)
+        
+        let fileManager = FileManager.default
+        let filePath = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("Teengle")
+        if !fileManager.fileExists(atPath: filePath.path) {
+            do {
+                try fileManager.createDirectory(atPath: filePath.path, withIntermediateDirectories: true, attributes: nil)
+            }catch {
+                print("Couldn't create document directory")
+            }
+        }
+        mPathName = filePath.lastPathComponent
+        print(mPathName)
     }
     
     deinit {
         removeNotificationObserver()
+    }
+    
+    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        print("called.. test \(navigationAction.request.url)")
+        
+//        guard navigationAction.targetFrame?.isMainFrame != false else {
+//            print("??/")
+//                decisionHandler(.allow)
+//                return
+//            }
+//
+//        decisionHandler(.cancel)
+//        return;
+        guard let requestURL = navigationAction.request.url?.absoluteString else { return }
+
+        if requestURL.contains("teengle.co.kr"){
+            print("here1")
+            decisionHandler(.allow)
+        }
+        else {
+            print("here2")
+            decisionHandler(.allow)
+        }
+//        if let host = navigationAction.request.url?.host {
+//            if host == "www.apple.com" {
+//                decisionHandler(.allow)
+//                return
+//            }
+//        }
+//
+//        decisionHandler(.cancel)
     }
     
     private func handleFirebaseDynamicLink() {
@@ -108,21 +157,39 @@ class ViewController: UIViewController, WKScriptMessageHandler, UIImagePickerCon
     private func addNotificationObserver() {
         NotificationCenter.default.addObserver(self, selector: #selector(onNotificationReceived(notification:)), name: Notification.Name(rawValue: "clickFirebaseDynamicLink"), object: nil)
         
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(onAppStatusReceived(notification:)), name: Notification.Name(rawValue: Constants.activateMessageKey), object: nil)
+        
+        
     }
     
     private func removeNotificationObserver() {
         NotificationCenter.default.removeObserver(self, name: Notification.Name(rawValue: "clickFirebaseDynamicLink"), object: nil)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: Constants.firebaseNotificationNameKey), object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: Constants.activateMessageKey), object: nil)
     }
     
     @objc func onNotificationReceived(notification: Notification) {
         if let urlString = notification.object as? String {
             
-            self.wkWebView?.load(URLRequest(url: URL(string: urlString)!))
+            //self.wkWebView?.load(URLRequest(url: URL(string: urlString)!))
+            
+            self.wkWebView?.evaluateJavaScript("setDirectLink('"+urlString+"');", completionHandler: nil)
            
         }
     }
     
+    // App 상태 메시지를 받았을 호출되는 메소드
+    @objc func onAppStatusReceived(notification: Notification) {
+        if let data = notification.object as? String {
+            print(data)
+            if data == "activate" {
+                self.wkWebView?.evaluateJavaScript("setActivate();", completionHandler: nil)
+            }else {
+                self.wkWebView?.evaluateJavaScript("setDeactivate();", completionHandler: nil)
+            }
+        }
+    }
     
     @objc func userNotifyMessage(_ notification: Notification) {
         print("userNotifyMessage called..")
@@ -136,13 +203,8 @@ class ViewController: UIViewController, WKScriptMessageHandler, UIImagePickerCon
         print("message name => \(message.name)")
         print("message body => \(message.body)")
         
+        // 카메라 앱 호출
         if (message.name == "camera") {
-            //self.imagePicker.present(from: nil)
-            //imagePicker.allowsEditing = true
-            //imagePicker.sourceType = .camera
-            
-            //present(imagePicker, animated: true, completion: nil)
-            ///self.presentedViewController(imagePicker, animated: true, completion: nil)
             imagePicker.startImagePicker(withSourceType: .camera) { [weak self] image in
                         //self?.imageView.image = image
                 let imageData:NSData = image.jpegData(compressionQuality: 0.50)! as NSData  //mage.pngData()! as NSData
@@ -164,7 +226,7 @@ class ViewController: UIViewController, WKScriptMessageHandler, UIImagePickerCon
                     if (strBase64.count > (index + 499999)) {
                         readLength += 500000
                     }else {
-                        readData = strBase64.substring(from: index, to: strBase64.count-1)
+                        readData = strBase64.lastsubstring(from: index, to: strBase64.count-1)
                         //print(readData)
                         // script call
                         self?.wkWebView?.evaluateJavaScript("addCameraData('"+readData+"');", completionHandler: nil)
@@ -188,15 +250,18 @@ class ViewController: UIViewController, WKScriptMessageHandler, UIImagePickerCon
                 var readLength = 500000
                 var readData: String = ""
                 print(strBase64.count)
+                var cnt = 0
                 repeat {
                     readData = strBase64.substring(from: index, to: readLength)
                     // script call
+                    print(cnt)
+                    cnt += 1
                     self?.wkWebView?.evaluateJavaScript("addAlbumData('"+readData+"');", completionHandler: nil)
                     index = readLength
                     if (strBase64.count > (index + 499999)) {
                         readLength += 500000
                     }else {
-                        readData = strBase64.substring(from: index, to: strBase64.count)
+                        readData = strBase64.lastsubstring(from: index, to: strBase64.count-1)
                         // script call
                         self?.wkWebView?.evaluateJavaScript("addAlbumData('"+readData+"');", completionHandler: nil)
                         break
@@ -229,6 +294,12 @@ class ViewController: UIViewController, WKScriptMessageHandler, UIImagePickerCon
         }else if(message.name == "device") {
             let deviceid = UIDevice.current.identifierForVendor?.uuidString
             self.wkWebView?.evaluateJavaScript("setDeviceKey('"+deviceid!+"');", completionHandler: nil)
+        }else if(message.name == "dir") {
+            print("dirname => " + self.mPathName!)
+            self.wkWebView?.evaluateJavaScript("setDirectory('"+self.mPathName!+"');", completionHandler: nil)
+        }else if(message.name == "appexit") {
+            print("app exit call")
+            UIApplication.shared.perform(#selector(NSXPCConnection.suspend))
         }else if(message.name == "cache") {
             print("cache called......")
             print(message.body)
@@ -315,6 +386,50 @@ class ViewController: UIViewController, WKScriptMessageHandler, UIImagePickerCon
                     self.wkWebView?.evaluateJavaScript("setReadBase64('Not found data');", completionHandler: nil)
                 }
             }
+        // Teengle directory
+        }else if(message.name == "teengle") {
+            print("teengle directory base64 called......")
+            print(message.body)
+            if let getdata: [String: String] = message.body as? Dictionary {
+                print("teengle directory callBase64Save called..")
+                print("fileKey : " + getdata["fileKey"]!)
+                print("data : " + getdata["data"]!)
+                
+                let fileManager = FileManager.default
+                let urls = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("Teengle")
+                let fileUrl = urls.appendingPathComponent(getdata["fileKey"]!)
+                let filePath = fileUrl.path
+                print("filePath =>\(filePath)")
+                if !fileManager.fileExists(atPath: filePath) {  // 파일이 존재하지 않으면..
+                    //let contents = getdata["data"]
+                    let contents: Data? = getdata["data"]?.data(using: .utf8)
+                    
+                    fileManager.createFile(atPath: filePath, contents: contents)
+                }else {
+                    let contents: Data? = getdata["data"]?.data(using: .utf8)
+                    
+                    fileManager.createFile(atPath: filePath, contents: contents)
+                }
+                
+            }else {
+                print("teengle callBase64Read called..")
+                print("fileKey : \(message.body)")
+                
+                let fileManager = FileManager.default
+                let urls = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("Teengle")
+                let fileUrl = urls.appendingPathComponent(message.body as! String)
+                let filePath = fileUrl.path
+                print("fileUrl =>\(fileUrl)")
+                print("filePath =>\(filePath)")
+                do {
+                    let text = try String(contentsOf: fileUrl, encoding: .utf8)
+                    print(text)
+                    self.wkWebView?.evaluateJavaScript("setTeengleReadBase64('"+text+"');", completionHandler: nil)
+                }catch let e {
+                    print(e.localizedDescription)
+                    self.wkWebView?.evaluateJavaScript("setTeengleReadBase64('Not found data');", completionHandler: nil)
+                }
+            }
         }else if(message.name == "token") {
             self.wkWebView?.evaluateJavaScript("setTokenData('"+mToken!+"');", completionHandler: nil)
         }else if(message.name == "share") {
@@ -393,6 +508,44 @@ extension ViewController: WKUIDelegate {
             self.present(alertController, animated: true, completion: nil)
         }
     }
+    
+    func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
+
+            let loadUrl : String = navigationAction.request.url!.absoluteString
+        
+        if navigationAction.targetFrame == nil || navigationAction.targetFrame?.isMainFrame == false {
+            webView.load(navigationAction.request)
+        }else {
+            if (loadUrl.contains("https://")) {
+                if #available(iOS 10.0,*) {
+                    if let aString = URL(string:(navigationAction.request.url?.absoluteString )!) {
+                        UIApplication.shared.open(aString, options:[:], completionHandler: { success in
+                        })
+                    }
+                } else {
+                    if let aString = URL(string:(navigationAction.request.url?.absoluteString )!) {
+                        UIApplication.shared.openURL(aString)
+                    }
+                }
+            } else {
+                if let aString = URL(string:(navigationAction.request.url?.absoluteString )!) {
+                    UIApplication.shared.openURL(aString)
+                }
+            }
+        }
+            print("here.......")
+            return nil
+    }
+    
+//
+//    func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
+//        if navigationAction.targetFrame == nil || navigationAction.targetFrame?.isMainFrame == false {
+//            webView.load(navigationAction.request)
+//        }
+//        return nil
+//    }
+        
+    
 }
 
 extension String {
@@ -407,5 +560,17 @@ extension String {
                         
       // 파싱
       return String(self[startIndex ..< endIndex])
+    }
+    
+    func lastsubstring(from: Int, to: Int) -> String {
+      guard from < count, to >= 0, to - from >= 0 else {
+          return ""
+      }
+                        
+      // Index 값 획득
+      let startIndex = index(self.startIndex, offsetBy: from)
+              
+      // 파싱
+      return String(self[startIndex ..< self.endIndex])
     }
 }

@@ -1,0 +1,189 @@
+2022-01-15 14:18:23 +0000  Initial pipeline context: <IDEDistributionProcessingPipelineContext: 0x7fa0e1cb0dc0; archive(resolved)="<IDEArchive: 0x7fa10760d030>", distributionTask(resolved)="2", distributionDestination(resolved)="2", distributionMethod(resolved)="<IDEDistributionMethodiOSAppStoreDistribution: 0x7fa0c38909e0>", team(resolved)="<IDEProvisioningDisambiguatableBasicTeam: 0x7fa0e222ce20; teamID='3VT9L9KU83', teamName='gamin ryu', teamType='Individual', username='teengle.cs@gmail.com', isFreeProvisioningTeam='0'>">
+	Chain (16, self inclusive):
+	<IDEDistributionProcessingPipelineContext: 0x7fa0e1cb0dc0; archive = "<IDEArchive: 0x7fa10760d030>", distributionMethod="<IDEDistributionMethodiOSAppStoreDistribution: 0x7fa0c38909e0>", team="<IDEProvisioningDisambiguatableBasicTeam: 0x7fa0e222ce20; teamID='3VT9L9KU83', teamName='gamin ryu', teamType='Individual', username='teengle.cs@gmail.com', isFreeProvisioningTeam='0'>">
+	<IDEDistributionProcessingPipelineContext: 0x7fa0e233b050; archive = "<IDEArchive: 0x7fa10760d030>", distributionMethod="<IDEDistributionMethodiOSAppStoreDistribution: 0x7fa0c38909e0>", team="<IDEProvisioningDisambiguatableBasicTeam: 0x7fa0e222ce20; teamID='3VT9L9KU83', teamName='gamin ryu', teamType='Individual', username='teengle.cs@gmail.com', isFreeProvisioningTeam='0'>">
+	<IDEDistributionContext: 0x7fa107629870; archive = "<IDEArchive: 0x7fa10760d030>", distributionMethod="<IDEDistributionMethodiOSAppStoreDistribution: 0x7fa0c38909e0>", team="<IDEProvisioningDisambiguatableBasicTeam: 0x7fa0e222ce20; teamID='3VT9L9KU83', teamName='gamin ryu', teamType='Individual', username='teengle.cs@gmail.com', isFreeProvisioningTeam='0'>">
+	<IDEDistributionContext: 0x7fa0c097ec90; archive = "<IDEArchive: 0x7fa10760d030>", distributionMethod="<IDEDistributionMethodiOSAppStoreDistribution: 0x7fa0c38909e0>", team="<IDEProvisioningDisambiguatableBasicTeam: 0x7fa0e222ce20; teamID='3VT9L9KU83', teamName='gamin ryu', teamType='Individual', username='teengle.cs@gmail.com', isFreeProvisioningTeam='0'>">
+	<IDEDistributionContext: 0x7fa0c7f07330; archive = "<IDEArchive: 0x7fa10760d030>", distributionMethod="<IDEDistributionMethodiOSAppStoreDistribution: 0x7fa0c38909e0>", team="<IDEProvisioningDisambiguatableBasicTeam: 0x7fa0e222ce20; teamID='3VT9L9KU83', teamName='gamin ryu', teamType='Individual', username='teengle.cs@gmail.com', isFreeProvisioningTeam='0'>">
+	<IDEDistributionContext: 0x7fa0c1a51180; archive = "<IDEArchive: 0x7fa10760d030>", distributionMethod="<IDEDistributionMethodiOSAppStoreDistribution: 0x7fa0c38909e0>", team="<IDEProvisioningDisambiguatableBasicTeam: 0x7fa0e222ce20; teamID='3VT9L9KU83', teamName='gamin ryu', teamType='Individual', username='teengle.cs@gmail.com', isFreeProvisioningTeam='0'>">
+	<IDEDistributionContext: 0x7fa0e3c687f0; archive = "<IDEArchive: 0x7fa10760d030>", distributionMethod="<IDEDistributionMethodiOSAppStoreDistribution: 0x7fa0c38909e0>", team="<IDEProvisioningDisambiguatableBasicTeam: 0x7fa0e222ce20; teamID='3VT9L9KU83', teamName='gamin ryu', teamType='Individual', username='teengle.cs@gmail.com', isFreeProvisioningTeam='0'>">
+	<IDEDistributionContext: 0x7fa0b6670910; archive = "<IDEArchive: 0x7fa10760d030>", distributionMethod="<IDEDistributionMethodiOSAppStoreDistribution: 0x7fa0c38909e0>", team="<IDEProvisioningDisambiguatableBasicTeam: 0x7fa0e222ce20; teamID='3VT9L9KU83', teamName='gamin ryu', teamType='Individual', username='teengle.cs@gmail.com', isFreeProvisioningTeam='0'>">
+	<IDEDistributionContext: 0x7fa0b66e6710; archive = "<IDEArchive: 0x7fa10760d030>", distributionMethod="<IDEDistributionMethodiOSAppStoreDistribution: 0x7fa0c38909e0>", team="<IDEProvisioningDisambiguatableBasicTeam: 0x7fa0e222ce20; teamID='3VT9L9KU83', teamName='gamin ryu', teamType='Individual', username='teengle.cs@gmail.com', isFreeProvisioningTeam='0'>">
+	<IDEDistributionContext: 0x7fa0e5655c70; archive = "<IDEArchive: 0x7fa10760d030>", distributionMethod="<IDEDistributionMethodiOSAppStoreDistribution: 0x7fa0c38909e0>", team="<IDEProvisioningDisambiguatableBasicTeam: 0x7fa0e222ce20; teamID='3VT9L9KU83', teamName='gamin ryu', teamType='Individual', username='teengle.cs@gmail.com', isFreeProvisioningTeam='0'>">
+	<IDEDistributionContext: 0x7fa0e1c9e130; archive = "<IDEArchive: 0x7fa10760d030>", distributionMethod="<IDEDistributionMethodiOSAppStoreDistribution: 0x7fa0c38909e0>", team="<IDEProvisioningDisambiguatableBasicTeam: 0x7fa0e222ce20; teamID='3VT9L9KU83', teamName='gamin ryu', teamType='Individual', username='teengle.cs@gmail.com', isFreeProvisioningTeam='0'>">
+	<IDEDistributionContext: 0x7fa0e23ae220; archive = "<IDEArchive: 0x7fa10760d030>", distributionMethod="<IDEDistributionMethodiOSAppStoreDistribution: 0x7fa0c38909e0>", team="<IDEProvisioningDisambiguatableBasicTeam: 0x7fa0e222ce20; teamID='3VT9L9KU83', teamName='gamin ryu', teamType='Individual', username='teengle.cs@gmail.com', isFreeProvisioningTeam='0'>">
+	<IDEDistributionContext: 0x7fa0b6678230; archive = "<IDEArchive: 0x7fa10760d030>", distributionMethod="<IDEDistributionMethodiOSAppStoreDistribution: 0x7fa0c38909e0>", team="<IDEProvisioningDisambiguatableBasicTeam: 0x7fa0e222ce20; teamID='3VT9L9KU83', teamName='gamin ryu', teamType='Individual', username='teengle.cs@gmail.com', isFreeProvisioningTeam='0'>">
+	<IDEDistributionContext: 0x7fa10660e780; archive = "<IDEArchive: 0x7fa10760d030>", distributionMethod="<IDEDistributionMethodiOSAppStoreDistribution: 0x7fa0c38909e0>", team="(null)">
+	<IDEDistributionContext: 0x7fa0c0e18d50; archive = "<IDEArchive: 0x7fa10760d030>", distributionMethod="<IDEDistributionMethodiOSAppStoreDistribution: 0x7fa0c38909e0>", team="(null)">
+	<IDEDistributionContext: 0x7fa0b5fc91b0; archive = "<IDEArchive: 0x7fa10760d030>", distributionMethod="(null)", team="(null)">
+</IDEDistributionProcessingPipelineContext: 0x7fa0e1cb0dc0>
+2022-01-15 14:18:23 +0000  Processing step: IDEDistributionCreateDestRootStep
+2022-01-15 14:18:23 +0000  Processing step: IDEDistributionCopyItemStep
+2022-01-15 14:18:23 +0000  Running /usr/bin/ditto '-V' '/Users/hist/Library/Developer/Xcode/Archives/2022-01-15/bksnpios 2022-01-15 11.17 PM.xcarchive/Products/Applications/bksnpios.app' '/var/folders/sz/7967kym57t9g3j2528pvx0cc0000gn/T/XcodeDistPipeline.~~~L5vPvF/Root/Payload/bksnpios.app'
+2022-01-15 14:18:23 +0000  >>> Copying /Users/hist/Library/Developer/Xcode/Archives/2022-01-15/bksnpios 2022-01-15 11.17 PM.xcarchive/Products/Applications/bksnpios.app 
+2022-01-15 14:18:23 +0000  copying file ./_CodeSignature/CodeResources ... 
+2022-01-15 14:18:23 +0000  4745 bytes for ./_CodeSignature/CodeResources
+2022-01-15 14:18:23 +0000  copying file ./bksnpios ... 
+2022-01-15 14:18:23 +0000  64419232 bytes for ./bksnpios
+copying file ./index.html ... 
+2022-01-15 14:18:23 +0000  130152 bytes for ./index.html
+copying file ./GoogleService-Info.plist ... 
+2022-01-15 14:18:23 +0000  647 bytes for ./GoogleService-Info.plist
+2022-01-15 14:18:23 +0000  copying file ./Base.lproj/Main.storyboardc/UIViewController-BYZ-38-t0r.nib ... 
+2022-01-15 14:18:23 +0000  931 bytes for ./Base.lproj/Main.storyboardc/UIViewController-BYZ-38-t0r.nib
+copying file ./Base.lproj/Main.storyboardc/BYZ-38-t0r-view-8bC-Xf-vdC.nib ... 
+2022-01-15 14:18:23 +0000  1197 bytes for ./Base.lproj/Main.storyboardc/BYZ-38-t0r-view-8bC-Xf-vdC.nib
+2022-01-15 14:18:23 +0000  copying file ./Base.lproj/Main.storyboardc/Info.plist ... 
+2022-01-15 14:18:23 +0000  258 bytes for ./Base.lproj/Main.storyboardc/Info.plist
+2022-01-15 14:18:23 +0000  copying file ./Base.lproj/LaunchScreen.storyboardc/01J-lp-oVM-view-Ze5-6b-2t3.nib ... 
+2022-01-15 14:18:23 +0000  1197 bytes for ./Base.lproj/LaunchScreen.storyboardc/01J-lp-oVM-view-Ze5-6b-2t3.nib
+copying file ./Base.lproj/LaunchScreen.storyboardc/UIViewController-01J-lp-oVM.nib ... 
+2022-01-15 14:18:23 +0000  896 bytes for ./Base.lproj/LaunchScreen.storyboardc/UIViewController-01J-lp-oVM.nib
+copying file ./Base.lproj/LaunchScreen.storyboardc/Info.plist ... 
+2022-01-15 14:18:23 +0000  258 bytes for ./Base.lproj/LaunchScreen.storyboardc/Info.plist
+2022-01-15 14:18:23 +0000  copying file ./README.md ... 
+2022-01-15 14:18:23 +0000  4627 bytes for ./README.md
+2022-01-15 14:18:23 +0000  copying file ./User.plist ... 
+2022-01-15 14:18:23 +0000  56 bytes for ./User.plist
+copying file ./embedded.mobileprovision ... 
+2022-01-15 14:18:23 +0000  12128 bytes for ./embedded.mobileprovision
+copying file ./Info.plist ... 
+2022-01-15 14:18:23 +0000  1803 bytes for ./Info.plist
+2022-01-15 14:18:23 +0000  copying file ./PkgInfo ... 
+2022-01-15 14:18:23 +0000  8 bytes for ./PkgInfo
+2022-01-15 14:18:23 +0000  /usr/bin/ditto exited with 0
+2022-01-15 14:18:23 +0000  Processing step: IDEDistributionEmbedProfileStep
+2022-01-15 14:18:23 +0000  Processing step: IDEDistributionInfoPlistStep
+2022-01-15 14:18:23 +0000  Processing step: IDEDistributionItemRemovalStep
+2022-01-15 14:18:23 +0000  Processing step: IDEDistributionAppThinningPlistStep
+2022-01-15 14:18:23 +0000  Skipping step: IDEDistributionAppThinningPlistStep because it said so
+2022-01-15 14:18:23 +0000  Processing step: IDEDistributionCompileBitcodeStep
+2022-01-15 14:18:23 +0000  Skipping step: IDEDistributionCompileBitcodeStep because it said so
+2022-01-15 14:18:23 +0000  Processing step: IDEDistributionCodeSlimmingStep
+2022-01-15 14:18:23 +0000  Running /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/bitcode_strip '/var/folders/sz/7967kym57t9g3j2528pvx0cc0000gn/T/XcodeDistPipeline.~~~L5vPvF/Root/Payload/bksnpios.app/bksnpios' '-l' '-keep_cs' '-o' '/var/folders/sz/7967kym57t9g3j2528pvx0cc0000gn/T/XcodeDistPipeline.~~~L5vPvF/Root/Payload/bksnpios.app/bksnpios'
+2022-01-15 14:18:23 +0000  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/bitcode_strip exited with 0
+2022-01-15 14:18:24 +0000  Processing step: IDEDistributionCopyBCSymbolMapsStep
+2022-01-15 14:18:24 +0000  Running /usr/bin/ditto '-V' '/Users/hist/Library/Developer/Xcode/Archives/2022-01-15/bksnpios 2022-01-15 11.17 PM.xcarchive/BCSymbolMaps/6DD9A72B-F795-3334-AAA5-666BDD986739.bcsymbolmap' '/var/folders/sz/7967kym57t9g3j2528pvx0cc0000gn/T/XcodeDistPipeline.~~~L5vPvF/Root/BCSymbolMaps/6DD9A72B-F795-3334-AAA5-666BDD986739.bcsymbolmap'
+2022-01-15 14:18:24 +0000  >>> Copying /Users/hist/Library/Developer/Xcode/Archives/2022-01-15/bksnpios 2022-01-15 11.17 PM.xcarchive/BCSymbolMaps/6DD9A72B-F795-3334-AAA5-666BDD986739.bcsymbolmap 
+2022-01-15 14:18:24 +0000  copying file ./6DD9A72B-F795-3334-AAA5-666BDD986739.bcsymbolmap ... 
+2022-01-15 14:18:24 +0000  4989890 bytes for ./6DD9A72B-F795-3334-AAA5-666BDD986739.bcsymbolmap
+2022-01-15 14:18:24 +0000  /usr/bin/ditto exited with 0
+2022-01-15 14:18:24 +0000  Processing step: IDEDistributionSymbolsStep
+2022-01-15 14:18:24 +0000  Excluding symbols for bksnpios.app
+2022-01-15 14:18:24 +0000  Processing step: IDEDistributionCopyAppleProvidedContentStep
+2022-01-15 14:18:24 +0000  Processing step: IDEDistributionAppThinningStep
+2022-01-15 14:18:24 +0000  Skipping step: IDEDistributionAppThinningStep because it said so
+2022-01-15 14:18:24 +0000  Processing step: IDEDistributionArchThinningStep
+2022-01-15 14:18:24 +0000  Running /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/sz/7967kym57t9g3j2528pvx0cc0000gn/T/XcodeDistPipeline.~~~L5vPvF/Root/Payload/bksnpios.app/bksnpios' '-verify_arch' 'arm64e'
+2022-01-15 14:18:24 +0000  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 1
+2022-01-15 14:18:24 +0000  Skipping architecture thinning for item "bksnpios" because arch "arm64e" wasn't found
+2022-01-15 14:18:24 +0000  Processing step: IDEDistributionODRStep
+2022-01-15 14:18:24 +0000  Processing step: IDEDistributionStripXattrsStep
+2022-01-15 14:18:24 +0000  Running /usr/bin/xattr '-crs' '/var/folders/sz/7967kym57t9g3j2528pvx0cc0000gn/T/XcodeDistPipeline.~~~L5vPvF/Root/Payload/bksnpios.app'
+2022-01-15 14:18:24 +0000  /usr/bin/xattr exited with 0
+2022-01-15 14:18:24 +0000  Processing step: IDEDistributionCodesignStep
+2022-01-15 14:18:24 +0000  Entitlements for <IDEDistributionItem: 0x7fa0c1fa6480; bundleID='bksnp.ohnion', path='<DVTFilePath:0x7fa0b5fca6f0:'/Users/hist/Library/Developer/Xcode/Archives/2022-01-15/bksnpios 2022-01-15 11.17 PM.xcarchive/Products/Applications/bksnpios.app'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x7fa0c28d4990; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x7fa0e08d42f0; name='Apple Distribution: gamin ryu (3VT9L9KU83)', hash='1B59BE8467803CC1149856B6EB18E4D3D6CDA9D5', serialNumber='261AA483BC63C9E997EB02B4E1C48AB9', certificateKinds='(
+    "1.2.840.113635.100.6.1.7",
+    "1.2.840.113635.100.6.1.4"
+), issueDate='2022-01-15 08:45:20 +0000''>', entitlements='{
+    "application-identifier" = "3VT9L9KU83.bksnp.ohnion";
+    "aps-environment" = production;
+    "beta-reports-active" = 1;
+    "com.apple.developer.associated-domains" =     (
+        "ohnion.page.link"
+    );
+    "com.apple.developer.team-identifier" = 3VT9L9KU83;
+    "get-task-allow" = 0;
+}', teamID='3VT9L9KU83', identifier='bksnp.ohnion', executablePath='<DVTFilePath:0x7fa0e1349050:'/Users/hist/Library/Developer/Xcode/Archives/2022-01-15/bksnpios 2022-01-15 11.17 PM.xcarchive/Products/Applications/bksnpios.app/bksnpios'>', hardenedRuntime='0'>'>: {
+    "application-identifier" = "3VT9L9KU83.bksnp.ohnion";
+    "aps-environment" = production;
+    "beta-reports-active" = 1;
+    "com.apple.developer.associated-domains" =     (
+        "ohnion.page.link"
+    );
+    "com.apple.developer.team-identifier" = 3VT9L9KU83;
+    "get-task-allow" = 0;
+}
+2022-01-15 14:18:24 +0000  Entitlements for <IDEDistributionItem: 0x7fa0c1fa6480; bundleID='bksnp.ohnion', path='<DVTFilePath:0x7fa0b5fca6f0:'/Users/hist/Library/Developer/Xcode/Archives/2022-01-15/bksnpios 2022-01-15 11.17 PM.xcarchive/Products/Applications/bksnpios.app'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x7fa0c28d4990; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x7fa0e1caea10; name='Apple Distribution: gamin ryu (3VT9L9KU83)', hash='1B59BE8467803CC1149856B6EB18E4D3D6CDA9D5', serialNumber='261AA483BC63C9E997EB02B4E1C48AB9', certificateKinds='(
+    "1.2.840.113635.100.6.1.7",
+    "1.2.840.113635.100.6.1.4"
+), issueDate='2022-01-15 08:45:20 +0000''>', entitlements='{
+    "application-identifier" = "3VT9L9KU83.bksnp.ohnion";
+    "aps-environment" = production;
+    "beta-reports-active" = 1;
+    "com.apple.developer.associated-domains" =     (
+        "ohnion.page.link"
+    );
+    "com.apple.developer.team-identifier" = 3VT9L9KU83;
+    "get-task-allow" = 0;
+}', teamID='3VT9L9KU83', identifier='bksnp.ohnion', executablePath='<DVTFilePath:0x7fa0e1349050:'/Users/hist/Library/Developer/Xcode/Archives/2022-01-15/bksnpios 2022-01-15 11.17 PM.xcarchive/Products/Applications/bksnpios.app/bksnpios'>', hardenedRuntime='0'>'> are: {
+    "application-identifier" = "3VT9L9KU83.bksnp.ohnion";
+    "aps-environment" = production;
+    "beta-reports-active" = 1;
+    "com.apple.developer.associated-domains" =     (
+        "ohnion.page.link"
+    );
+    "com.apple.developer.team-identifier" = 3VT9L9KU83;
+    "get-task-allow" = 0;
+}
+2022-01-15 14:18:24 +0000  Writing entitlements for <IDEDistributionItem: 0x7fa0c1fa6480; bundleID='bksnp.ohnion', path='<DVTFilePath:0x7fa0b5fca6f0:'/Users/hist/Library/Developer/Xcode/Archives/2022-01-15/bksnpios 2022-01-15 11.17 PM.xcarchive/Products/Applications/bksnpios.app'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x7fa0c28d4990; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x7fa0c560d4c0; name='Apple Distribution: gamin ryu (3VT9L9KU83)', hash='1B59BE8467803CC1149856B6EB18E4D3D6CDA9D5', serialNumber='261AA483BC63C9E997EB02B4E1C48AB9', certificateKinds='(
+    "1.2.840.113635.100.6.1.7",
+    "1.2.840.113635.100.6.1.4"
+), issueDate='2022-01-15 08:45:20 +0000''>', entitlements='{
+    "application-identifier" = "3VT9L9KU83.bksnp.ohnion";
+    "aps-environment" = production;
+    "beta-reports-active" = 1;
+    "com.apple.developer.associated-domains" =     (
+        "ohnion.page.link"
+    );
+    "com.apple.developer.team-identifier" = 3VT9L9KU83;
+    "get-task-allow" = 0;
+}', teamID='3VT9L9KU83', identifier='bksnp.ohnion', executablePath='<DVTFilePath:0x7fa0e1349050:'/Users/hist/Library/Developer/Xcode/Archives/2022-01-15/bksnpios 2022-01-15 11.17 PM.xcarchive/Products/Applications/bksnpios.app/bksnpios'>', hardenedRuntime='0'>'> to: /var/folders/sz/7967kym57t9g3j2528pvx0cc0000gn/T/XcodeDistPipeline.~~~L5vPvF/entitlements~~~vP4oMH
+2022-01-15 14:18:24 +0000  Running /usr/bin/codesign '-vvv' '--force' '--sign' '1B59BE8467803CC1149856B6EB18E4D3D6CDA9D5' '--entitlements' '/var/folders/sz/7967kym57t9g3j2528pvx0cc0000gn/T/XcodeDistPipeline.~~~L5vPvF/entitlements~~~vP4oMH' '--preserve-metadata=identifier,flags,runtime' '/var/folders/sz/7967kym57t9g3j2528pvx0cc0000gn/T/XcodeDistPipeline.~~~L5vPvF/Root/Payload/bksnpios.app'
+2022-01-15 14:18:24 +0000  /var/folders/sz/7967kym57t9g3j2528pvx0cc0000gn/T/XcodeDistPipeline.~~~L5vPvF/Root/Payload/bksnpios.app: replacing existing signature
+2022-01-15 14:18:28 +0000  /var/folders/sz/7967kym57t9g3j2528pvx0cc0000gn/T/XcodeDistPipeline.~~~L5vPvF/Root/Payload/bksnpios.app: signed app bundle with Mach-O thin (arm64) [bksnp.ohnion]
+2022-01-15 14:18:28 +0000  /usr/bin/codesign exited with 0
+2022-01-15 14:18:28 +0000  Processing step: IDEDistributionZipODRItemStep
+2022-01-15 14:18:28 +0000  Skipping step: IDEDistributionZipODRItemStep because it said so
+2022-01-15 14:18:28 +0000  Processing step: IDEDistributionCreateIPAStep
+2022-01-15 14:18:28 +0000  Running /usr/bin/ditto '-V' '-c' '-k' '--norsrc' '/var/folders/sz/7967kym57t9g3j2528pvx0cc0000gn/T/XcodeDistPipeline.~~~L5vPvF/Root' '/var/folders/sz/7967kym57t9g3j2528pvx0cc0000gn/T/XcodeDistPipeline.~~~L5vPvF/Packages/bksnpios.ipa'
+2022-01-15 14:18:28 +0000  >>> Copying /var/folders/sz/7967kym57t9g3j2528pvx0cc0000gn/T/XcodeDistPipeline.~~~L5vPvF/Root 
+2022-01-15 14:18:28 +0000  copying file ./BCSymbolMaps/6DD9A72B-F795-3334-AAA5-666BDD986739.bcsymbolmap ... 
+2022-01-15 14:18:28 +0000  4989890 bytes for ./BCSymbolMaps/6DD9A72B-F795-3334-AAA5-666BDD986739.bcsymbolmap
+2022-01-15 14:18:28 +0000  copying file ./Payload/bksnpios.app/_CodeSignature/CodeResources ... 
+4745 bytes for ./Payload/bksnpios.app/_CodeSignature/CodeResources
+copying file ./Payload/bksnpios.app/bksnpios ... 
+2022-01-15 14:18:29 +0000  58010240 bytes for ./Payload/bksnpios.app/bksnpios
+copying file ./Payload/bksnpios.app/index.html ... 
+2022-01-15 14:18:29 +0000  130152 bytes for ./Payload/bksnpios.app/index.html
+copying file ./Payload/bksnpios.app/GoogleService-Info.plist ... 
+2022-01-15 14:18:29 +0000  647 bytes for ./Payload/bksnpios.app/GoogleService-Info.plist
+2022-01-15 14:18:29 +0000  copying file ./Payload/bksnpios.app/Base.lproj/Main.storyboardc/UIViewController-BYZ-38-t0r.nib ... 
+931 bytes for ./Payload/bksnpios.app/Base.lproj/Main.storyboardc/UIViewController-BYZ-38-t0r.nib
+2022-01-15 14:18:29 +0000  copying file ./Payload/bksnpios.app/Base.lproj/Main.storyboardc/BYZ-38-t0r-view-8bC-Xf-vdC.nib ... 
+1197 bytes for ./Payload/bksnpios.app/Base.lproj/Main.storyboardc/BYZ-38-t0r-view-8bC-Xf-vdC.nib
+copying file ./Payload/bksnpios.app/Base.lproj/Main.storyboardc/Info.plist ... 
+2022-01-15 14:18:29 +0000  258 bytes for ./Payload/bksnpios.app/Base.lproj/Main.storyboardc/Info.plist
+copying file ./Payload/bksnpios.app/Base.lproj/LaunchScreen.storyboardc/01J-lp-oVM-view-Ze5-6b-2t3.nib ... 
+2022-01-15 14:18:29 +0000  1197 bytes for ./Payload/bksnpios.app/Base.lproj/LaunchScreen.storyboardc/01J-lp-oVM-view-Ze5-6b-2t3.nib
+copying file ./Payload/bksnpios.app/Base.lproj/LaunchScreen.storyboardc/UIViewController-01J-lp-oVM.nib ... 
+896 bytes for ./Payload/bksnpios.app/Base.lproj/LaunchScreen.storyboardc/UIViewController-01J-lp-oVM.nib
+copying file ./Payload/bksnpios.app/Base.lproj/LaunchScreen.storyboardc/Info.plist ... 
+2022-01-15 14:18:29 +0000  258 bytes for ./Payload/bksnpios.app/Base.lproj/LaunchScreen.storyboardc/Info.plist
+copying file ./Payload/bksnpios.app/README.md ... 
+2022-01-15 14:18:29 +0000  4627 bytes for ./Payload/bksnpios.app/README.md
+copying file ./Payload/bksnpios.app/User.plist ... 
+2022-01-15 14:18:29 +0000  56 bytes for ./Payload/bksnpios.app/User.plist
+copying file ./Payload/bksnpios.app/embedded.mobileprovision ... 
+2022-01-15 14:18:29 +0000  12128 bytes for ./Payload/bksnpios.app/embedded.mobileprovision
+copying file ./Payload/bksnpios.app/Info.plist ... 
+2022-01-15 14:18:29 +0000  1803 bytes for ./Payload/bksnpios.app/Info.plist
+copying file ./Payload/bksnpios.app/PkgInfo ... 
+8 bytes for ./Payload/bksnpios.app/PkgInfo
+2022-01-15 14:18:29 +0000  /usr/bin/ditto exited with 0
+2022-01-15 14:18:29 +0000  Processing step: IDEDistributionAppStoreInformationStep
+2022-01-15 14:18:29 +0000  Skipping step: IDEDistributionAppStoreInformationStep because it said so
+2022-01-15 14:18:29 +0000  Processing step: IDEDistributionGenerateProcessedDistributionItems
+2022-01-15 14:18:29 +0000  IDEDistributionItem init <DVTFilePath:0x7fa0d0213550:'/var/folders/sz/7967kym57t9g3j2528pvx0cc0000gn/T/XcodeDistPipeline.~~~L5vPvF/Root/Payload/bksnpios.app'>
+2022-01-15 14:18:30 +0000  Processing step: IDEDistributionCreateManifestStep
+2022-01-15 14:18:30 +0000  Skipping step: IDEDistributionCreateManifestStep because it said so

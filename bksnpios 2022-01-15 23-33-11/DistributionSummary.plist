@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bksnpios.ipa</key>
+	<array>
+		<dict>
+			<key>architectures</key>
+			<array>
+				<string>arm64</string>
+			</array>
+			<key>bitcode</key>
+			<true/>
+			<key>buildNumber</key>
+			<string>2</string>
+			<key>certificate</key>
+			<dict>
+				<key>SHA1</key>
+				<string>1B59BE8467803CC1149856B6EB18E4D3D6CDA9D5</string>
+				<key>dateExpires</key>
+				<string>2023/01/15</string>
+				<key>type</key>
+				<string>Apple Distribution</string>
+			</dict>
+			<key>entitlements</key>
+			<dict>
+				<key>application-identifier</key>
+				<string>3VT9L9KU83.bksnp.ohnion</string>
+				<key>aps-environment</key>
+				<string>production</string>
+				<key>beta-reports-active</key>
+				<true/>
+				<key>com.apple.developer.associated-domains</key>
+				<array>
+					<string>ohnion.page.link</string>
+				</array>
+				<key>com.apple.developer.team-identifier</key>
+				<string>3VT9L9KU83</string>
+				<key>get-task-allow</key>
+				<false/>
+			</dict>
+			<key>name</key>
+			<string>bksnpios.app</string>
+			<key>profile</key>
+			<dict>
+				<key>UUID</key>
+				<string>67d43741-85f3-4caf-bd76-98782f649a40</string>
+				<key>dateExpires</key>
+				<string>2023/01/15</string>
+				<key>name</key>
+				<string>Ohnion</string>
+			</dict>
+			<key>symbols</key>
+			<true/>
+			<key>team</key>
+			<dict>
+				<key>id</key>
+				<string>3VT9L9KU83</string>
+				<key>name</key>
+				<string>gamin ryu</string>
+			</dict>
+			<key>versionNumber</key>
+			<string>1.0</string>
+		</dict>
+	</array>
+</dict>
+</plist>

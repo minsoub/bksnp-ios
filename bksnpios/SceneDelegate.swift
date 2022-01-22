@@ -16,10 +16,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
         //앱이 종료된 경우(폰에서 해당 앱을 swipe up) 동적 링크를 클릭시 콜백 함수가 호출되지 않는 이슈 수정
-                for userActivity in connectionOptions.userActivities {
-                    if let incomingURL = userActivity.webpageURL{
-                        print("Incoming URL is \(incomingURL)")
-                        let linkHandled = DynamicLinks.dynamicLinks().handleUniversalLink(incomingURL) { (dynamicLink, error) in
+        for userActivity in connectionOptions.userActivities {
+            if let incomingURL = userActivity.webpageURL{
+                print("Incoming URL is \(incomingURL)")
+                let linkHandled = DynamicLinks.dynamicLinks().handleUniversalLink(incomingURL) { (dynamicLink, error) in
                             guard error == nil else{
                                 print("Found an error \(error!.localizedDescription)")
                                 return
@@ -28,10 +28,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                                 self.handelIncomingDynamicLink(_dynamicLink: dynamicLink!)
                             }
                         }
-                        print(linkHandled)
-                        break
-                    }
-                        }
+                print(linkHandled)
+                break
+            }
+        }
                 
         
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -53,11 +53,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func sceneDidBecomeActive(_ scene: UIScene) {
         // Called when the scene has moved from an inactive state to an active state.
         // Use this method to restart any tasks that were paused (or not yet started) when the scene was inactive.
+        print("Activate");
+        let msg = "activate"
+        NotificationCenter.default.post(name: NSNotification.Name(Constants.activateMessageKey), object: msg, userInfo: nil)
     }
 
     func sceneWillResignActive(_ scene: UIScene) {
         // Called when the scene will move from an active state to an inactive state.
         // This may occur due to temporary interruptions (ex. an incoming phone call).
+        print("Deactivate");
+        let msg = "deactivate"
+        NotificationCenter.default.post(name: NSNotification.Name(Constants.activateMessageKey), object: msg, userInfo: nil)
     }
 
     func sceneWillEnterForeground(_ scene: UIScene) {
@@ -69,6 +75,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Called as the scene transitions from the foreground to the background.
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
+
     }
     
     // 동적 링크를 수신하기 위한 코드
