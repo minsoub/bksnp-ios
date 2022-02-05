@@ -21,6 +21,7 @@ class ViewController: UIViewController, WKScriptMessageHandler, UIImagePickerCon
         }()
     
     private var wkWebView: WKWebView? = nil
+    private var popupWebView: WKWebView? = nil
     private var config: WKWebViewConfiguration? = nil
     //var imagePicker = ImagePicker!  // UIImagePickerController()
     //let db = Database.database().reference()
@@ -43,8 +44,12 @@ class ViewController: UIViewController, WKScriptMessageHandler, UIImagePickerCon
         
         
         // Do any additional setup after loading the view.
+        let wkPreferences = WKPreferences()
+        wkPreferences.javaScriptCanOpenWindowsAutomatically = true
+        
         self.config = WKWebViewConfiguration.init()
         self.config?.userContentController = WKUserContentController.init()
+        self.config?.preferences = wkPreferences
         
         // * WKWebView JS -> iOS 핸들러 추가
         self.config?.userContentController.add(self, name: "camera")
@@ -63,18 +68,25 @@ class ViewController: UIViewController, WKScriptMessageHandler, UIImagePickerCon
         //    - 여기서는 self.view 화면 전체를 WKWebView로 구성하였습니다.
         //    - 추가로 설정한 WKWebViewConfiguration를 WKWebView 구성 시에 넣어 줍니다.
         self.wkWebView = WKWebView.init(frame: CGRect.init(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height), configuration: self.config!)
-       
+        //self.wkWebView = WKWebView.init(frame: CGRect.init(x: 0, y: 0, width: self.view.bounds.size.width, height: self.view.bounds.size.height), configuration: self.config!)
+        //self.wkWebView = WKWebView.init(frame: self.view.bounds, configuration: self.config!)
+        
+        
+        self.wkWebView?.contentMode = .scaleToFill  //  .scaleAspectFill
+        self.wkWebView?.sizeToFit()
+        self.wkWebView?.autoresizesSubviews = true
+        self.wkWebView?.configuration.allowsInlineMediaPlayback = true
         // * WKWebView 화면 비율 맞춤 설정
-        self.wkWebView?.autoresizingMask = UIView.AutoresizingMask(rawValue: UIView.AutoresizingMask.RawValue(UInt8(UIView.AutoresizingMask.flexibleWidth.rawValue) | UInt8(UIView.AutoresizingMask.flexibleHeight.rawValue)))
+        //self.wkWebView?.autoresizingMask = UIView.AutoresizingMask(rawValue: UIView.AutoresizingMask.RawValue(UInt8(UIView.AutoresizingMask.flexibleWidth.rawValue) | UInt8(UIView.AutoresizingMask.flexibleHeight.rawValue)))
  
         // * WKWebView 여백 및 배경 부분 색 투명하게 변경
         self.wkWebView?.backgroundColor = UIColor.clear
         self.wkWebView?.isOpaque = false
-        self.wkWebView?.loadHTMLString("<body style=\"background-color: transparent\">", baseURL: nil)
+        //self.wkWebView?.loadHTMLString("<body style=\"background-color: transparent\">", baseURL: nil)
         self.wkWebView?.uiDelegate = self
         self.wkWebView?.allowsBackForwardNavigationGestures = true
         self.wkWebView?.navigationDelegate = self
-        
+                
         // * WKWebView에 로딩할 URL 전달
         //    - 캐시 기본 정책 사용, 타임아웃은 10초로 지정하였습니다.
         let request: URLRequest = URLRequest.init(url: NSURL.init(string: Constants.webURL)! as URL, cachePolicy: URLRequest.CachePolicy.useProtocolCachePolicy, timeoutInterval: 10)
@@ -179,6 +191,12 @@ class ViewController: UIViewController, WKScriptMessageHandler, UIImagePickerCon
         }
     }
     
+//    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+//        webView.evaluateJavaScript("document.readyState", completionHandler: { (_, _) in
+//          webView.invalidateIntrinsicContentSize()
+//        })
+//      }
+    
     // App 상태 메시지를 받았을 호출되는 메소드
     @objc func onAppStatusReceived(notification: Notification) {
         if let data = notification.object as? String {
@@ -216,14 +234,15 @@ class ViewController: UIViewController, WKScriptMessageHandler, UIImagePickerCon
                 print(strBase64.count)  // 결과값이 3이 더 많다.. 고민해야됨
                 var cnt = 0
                 repeat {
-                    readData = strBase64.substring(from: index, to: readLength)
-                    //print(readData)
-                    // script call
-                    print(cnt)
-                    cnt += 1
-                    self?.wkWebView?.evaluateJavaScript("addCameraData('"+readData+"');", completionHandler: nil)
-                    index = readLength
+                    
                     if (strBase64.count > (index + 499999)) {
+                        readData = strBase64.substring(from: index, to: readLength)
+                        //print(readData)
+                        // script call
+                        print(cnt)
+                        cnt += 1
+                        self?.wkWebView?.evaluateJavaScript("addCameraData('"+readData+"');", completionHandler: nil)
+                        index = readLength
                         readLength += 500000
                     }else {
                         readData = strBase64.lastsubstring(from: index, to: strBase64.count-1)
@@ -252,13 +271,14 @@ class ViewController: UIViewController, WKScriptMessageHandler, UIImagePickerCon
                 print(strBase64.count)
                 var cnt = 0
                 repeat {
-                    readData = strBase64.substring(from: index, to: readLength)
-                    // script call
-                    print(cnt)
-                    cnt += 1
-                    self?.wkWebView?.evaluateJavaScript("addAlbumData('"+readData+"');", completionHandler: nil)
-                    index = readLength
                     if (strBase64.count > (index + 499999)) {
+                        readData = strBase64.substring(from: index, to: readLength)
+                        // script call
+                        print(cnt)
+                        cnt += 1
+                        self?.wkWebView?.evaluateJavaScript("addAlbumData('"+readData+"');", completionHandler: nil)
+                        index = readLength
+                        
                         readLength += 500000
                     }else {
                         readData = strBase64.lastsubstring(from: index, to: strBase64.count-1)
@@ -511,30 +531,37 @@ extension ViewController: WKUIDelegate {
     
     func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
 
-            let loadUrl : String = navigationAction.request.url!.absoluteString
+        popupWebView = WKWebView(frame: view.bounds, configuration: configuration)
+            popupWebView!.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+            popupWebView!.navigationDelegate = self
+            popupWebView!.uiDelegate = self
+            view.addSubview(popupWebView!)
+            return popupWebView!
         
-        if navigationAction.targetFrame == nil || navigationAction.targetFrame?.isMainFrame == false {
-            webView.load(navigationAction.request)
-        }else {
-            if (loadUrl.contains("https://")) {
-                if #available(iOS 10.0,*) {
-                    if let aString = URL(string:(navigationAction.request.url?.absoluteString )!) {
-                        UIApplication.shared.open(aString, options:[:], completionHandler: { success in
-                        })
-                    }
-                } else {
-                    if let aString = URL(string:(navigationAction.request.url?.absoluteString )!) {
-                        UIApplication.shared.openURL(aString)
-                    }
-                }
-            } else {
-                if let aString = URL(string:(navigationAction.request.url?.absoluteString )!) {
-                    UIApplication.shared.openURL(aString)
-                }
-            }
-        }
-            print("here.......")
-            return nil
+//        let loadUrl : String = navigationAction.request.url!.absoluteString
+//
+//        if navigationAction.targetFrame == nil || navigationAction.targetFrame?.isMainFrame == false {
+//            webView.load(navigationAction.request)
+//        }else {
+//            if (loadUrl.contains("https://")) {
+//                if #available(iOS 10.0,*) {
+//                    if let aString = URL(string:(navigationAction.request.url?.absoluteString )!) {
+//                        UIApplication.shared.open(aString, options:[:], completionHandler: { success in
+//                        })
+//                    }
+//                } else {
+//                    if let aString = URL(string:(navigationAction.request.url?.absoluteString )!) {
+//                        UIApplication.shared.openURL(aString)
+//                    }
+//                }
+//            } else {
+//                if let aString = URL(string:(navigationAction.request.url?.absoluteString )!) {
+//                    UIApplication.shared.openURL(aString)
+//                }
+//            }
+//        }
+//        print("here.......")
+//        return nil
     }
     
 //
@@ -544,6 +571,21 @@ extension ViewController: WKUIDelegate {
 //        }
 //        return nil
 //    }
+    
+    func webViewDidClose(_ webView: WKWebView) {
+      if webView == popupWebView {
+        popupWebView?.removeFromSuperview()
+        popupWebView = nil
+      }
+    }
+    
+    func webViewDidFinishLoad(_ webView: WKWebView) {
+         webView.frame.size.height = 1
+         let height = webView.scrollView.contentSize.height
+         var wvRect = webView.frame
+         wvRect.size.height = height
+         webView.frame = wvRect
+    }
         
     
 }

@@ -2,6 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSDocumentsFolderUsageDescription</key>
+	<string>도큐먼트 폴더에 다운로드 이미지저장</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>게시판 이미지 등록을 위한 앨범선택</string>
+	<key>NSCameraUsageDescription</key>
+	<string>게시판 이미지 등록을 위한 사진촬영</string>
 	<key>CFBundleIconName</key>
 	<string>AppIcon</string>
 	<key>FirebaseAppDelegateProxyEnabled</key>
